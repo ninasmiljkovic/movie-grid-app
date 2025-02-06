@@ -1,0 +1,8 @@
+<div class="grid-container">
+  <div
+    class="grid-item"
+    *ngFor="let movie of movies$ | async"
+  >
+    <app-movie-item [movie]="movie"></app-movie-item>
+  </div>
+</div>
