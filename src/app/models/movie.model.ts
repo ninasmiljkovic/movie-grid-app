@@ -1,4 +1,7 @@
-type RatingId = 'imdb' | 'popularity';
+export enum RatingId {
+  IMDB = 'imdb',
+  POPULARITY = 'popularity',
+}
 
 interface Rating {
   id: RatingId;

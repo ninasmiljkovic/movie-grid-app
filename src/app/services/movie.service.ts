@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {map, Observable, of} from 'rxjs';
-import { Movie } from '../models/movie.model';
+import {Movie, RatingId} from '../models/movie.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -33,7 +33,7 @@ export class MovieService {
   }
 
   private getImdbRating(movie: Movie): number {
-    const imdb = movie.ratings.find(rating => rating.id === 'imdb');
+    const imdb = movie.ratings.find(rating => rating.id === RatingId.IMDB);
     return imdb ? imdb.rating : 0;
   }
 }
