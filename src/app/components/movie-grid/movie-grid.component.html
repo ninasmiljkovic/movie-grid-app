@@ -1,7 +1,7 @@
 <div #gridContainer class="grid-container">
   <div
     class="grid-item"
-    *ngFor="let movie of movies; let i = index"
+    *ngFor="let movie of visibleMovies; let i = index; trackBy: trackByMovieId"
   >
     <app-movie-item
       [movie]="movie"

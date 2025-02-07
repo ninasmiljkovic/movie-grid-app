@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, HostListener, ViewChild} from '@angular/core';
 import { Movie } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
 
@@ -9,17 +9,38 @@ import { MovieService } from '../../services/movie.service';
   styleUrl: './movie-grid.component.scss'
 })
 
-export class MovieGridComponent {
+export class MovieGridComponent implements AfterViewInit {
   @ViewChild('gridContainer', { static: false }) gridContainer!: ElementRef;
 
-  movieClicked = new EventEmitter<void>();
   movies: Movie[] = [];
+  visibleMovies: Movie[] = [];
+  initialLoadCount = 30;
+  loadChunkSize = 48;
   selectedMovieIndex: number = -1;
 
   constructor(private movieService: MovieService) {
     this.movieService.getMovies().subscribe(data => {
       this.movies = data;
+      this.visibleMovies = this.movies.slice(0, this.initialLoadCount); // Load first 30 movies
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.loadMoreMovies(); // Ensure more movies load if needed
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 800) {
+      this.loadMoreMovies();
+    }
+  }
+
+  loadMoreMovies(): void {
+    if (this.visibleMovies.length < this.movies.length) {
+      const nextChunk = this.movies.slice(this.visibleMovies.length, this.visibleMovies.length + this.loadChunkSize);
+      this.visibleMovies = [...this.visibleMovies, ...nextChunk];
+    }
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -57,7 +78,7 @@ export class MovieGridComponent {
     const columns = 6; // Assuming 6 columns in the grid
 
       if (this.selectedMovieIndex === -1) {
-        this.movies[0].isSelected = true;
+        this.visibleMovies[0].isSelected = true;
         this.selectedMovieIndex = 0;
         return;
       }
@@ -68,13 +89,13 @@ export class MovieGridComponent {
           newIndex = Math.max(this.selectedMovieIndex - columns, 0);
           break;
         case 'ArrowDown':
-          newIndex = Math.min(this.selectedMovieIndex + columns, this.movies.length - 1);
+          newIndex = Math.min(this.selectedMovieIndex + columns, this.visibleMovies.length - 1);
           break;
         case 'ArrowLeft':
           newIndex = Math.max(this.selectedMovieIndex - 1, 0);
           break;
         case 'ArrowRight':
-          newIndex = Math.min(this.selectedMovieIndex + 1, this.movies.length - 1);
+          newIndex = Math.min(this.selectedMovieIndex + 1, this.visibleMovies.length - 1);
           break;
       }
 
@@ -94,11 +115,15 @@ export class MovieGridComponent {
 
   selectMovie(index: number) {
     if (this.selectedMovieIndex !== -1) {
-      this.movies[this.selectedMovieIndex].isSelected = false;
+      this.visibleMovies[this.selectedMovieIndex].isSelected = false;
     }
-    this.movies[index].isSelected = true;
+    this.visibleMovies[index].isSelected = true;
     this.selectedMovieIndex = index;
 
     this.scrollIntoView();
+  }
+
+  trackByMovieId(index: number, movie: Movie): number {
+    return movie.id;
   }
 }
