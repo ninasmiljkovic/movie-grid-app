@@ -11,7 +11,9 @@ interface Rating {
 export interface Movie {
   id: number;
   title: string;
-  posterPath: string;
-  releaseDate: string;
+  poster_path: string;
+  release_date: string;
   ratings: Rating[];
+  inFavorites?: boolean;
+  isSelected?: boolean;
 }
