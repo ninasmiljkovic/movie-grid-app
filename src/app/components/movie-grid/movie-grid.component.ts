@@ -93,7 +93,9 @@ export class MovieGridComponent {
   }
 
   selectMovie(index: number) {
-    this.movies[this.selectedMovieIndex].isSelected = false;
+    if (this.selectedMovieIndex !== -1) {
+      this.movies[this.selectedMovieIndex].isSelected = false;
+    }
     this.movies[index].isSelected = true;
     this.selectedMovieIndex = index;
 
