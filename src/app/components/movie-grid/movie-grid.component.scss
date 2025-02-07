@@ -1,0 +1,10 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  padding: 32px 132px 0 112px;
+  background-color: #e6e6e6;
+}
+
+.grid-item {
+  padding: 8px 5px;
+}
