@@ -1,8 +1,11 @@
-<div class="grid-container">
+<div #gridContainer class="grid-container">
   <div
     class="grid-item"
-    *ngFor="let movie of movies$ | async"
+    *ngFor="let movie of movies; let i = index"
   >
-    <app-movie-item [movie]="movie"></app-movie-item>
+    <app-movie-item
+      [movie]="movie"
+      (click)="selectMovie(i)"
+    ></app-movie-item>
   </div>
 </div>

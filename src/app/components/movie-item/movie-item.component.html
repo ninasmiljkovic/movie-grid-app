@@ -1,9 +1,11 @@
-<p>movie-item works!</p>
-<div class="movie-item">
+<div class="movie-item"
+     [class.__selected]="movie.isSelected"
+>
   <img [src]="'https://image.tmdb.org/t/p/w200/' + movie.poster_path"
        width="165px"
        height="240px"
        alt="{{ movie.title }}"
+       loading="lazy"
   >
   <div class="movie-item__description">
     <div class="movie-item__description__title-block">
@@ -11,9 +13,10 @@
     </div>
     <div class="movie-item__description__date-favourite-block">
       {{ movie.release_date || '' }}
-      <span class="favorite-icon" (click)="toggleFavorite()">
-    {{ movie.inFavorites ? '★' : '☆' }}
-  </span>
+      <div [innerText]="movie.inFavorites ? '★' : '☆'"
+           class="favorite-icon"
+      >
+      </div>
     </div>
   </div>
 </div>

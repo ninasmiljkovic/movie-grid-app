@@ -9,13 +9,21 @@
   text-align: center;
   transition: transform 0.1s ease-in-out, background 0.2s ease-in-out;
 
-  &:hover {
+  &.__selected {
     transform: scale(1.13, 1.15);
     cursor: pointer;
     background: #378ccb;
     border-radius: 5px;
     box-shadow: 0 0 1.5px rgba(0, 0, 0, 0.5);
   }
+
+  //&:hover {
+  //  transform: scale(1.13, 1.15);
+  //  cursor: pointer;
+  //  background: #378ccb;
+  //  border-radius: 5px;
+  //  box-shadow: 0 0 1.5px rgba(0, 0, 0, 0.5);
+  //}
 
   &__description {
     padding: 10px 12px;
@@ -47,8 +55,8 @@
     cursor: pointer;
     transition: color 0.1s ease-in-out;
 
-    &:hover {
-      color: #e6e6e6;
-    }
+    //&:hover {
+    //  color: #e6e6e6;
+    //}
   }
 }
