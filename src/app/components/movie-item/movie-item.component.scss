@@ -15,15 +15,16 @@
     background: #378ccb;
     border-radius: 5px;
     box-shadow: 0 0 1.5px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    z-index: 100;
   }
 
-  //&:hover {
-  //  transform: scale(1.13, 1.15);
-  //  cursor: pointer;
-  //  background: #378ccb;
-  //  border-radius: 5px;
-  //  box-shadow: 0 0 1.5px rgba(0, 0, 0, 0.5);
-  //}
+  &:hover:not(.__selected) {
+    cursor: pointer;
+    opacity: 0.8;
+    position: absolute;
+    z-index: 10;
+  }
 
   &__description {
     padding: 10px 12px;
