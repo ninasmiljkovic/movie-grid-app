@@ -56,8 +56,12 @@
     cursor: pointer;
     transition: color 0.1s ease-in-out;
 
-    //&:hover {
-    //  color: #e6e6e6;
-    //}
+    &:hover.__selected {
+      color: #e6e6e6;
+    }
+
+    &:hover:not(.__selected) {
+      font-weight: bolder;
+    }
   }
 }

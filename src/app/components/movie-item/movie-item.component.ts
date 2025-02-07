@@ -9,4 +9,8 @@ import { Movie } from '../../models/movie.model';
 })
 export class MovieItemComponent {
   @Input() movie!: Movie;
+
+  toggleFavourites() {
+    this.movie.inFavorites = !this.movie.inFavorites;
+  }
 }

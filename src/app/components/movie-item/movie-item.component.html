@@ -15,6 +15,8 @@
       {{ movie.release_date || '' }}
       <div [innerText]="movie.inFavorites ? '★' : '☆'"
            class="favorite-icon"
+           [class.__selected]="movie.isSelected"
+           (click)="toggleFavourites()"
       >
       </div>
     </div>
