@@ -108,7 +108,7 @@ export class MovieGridComponent implements AfterViewInit {
 
     if (gridItems[this.selectedMovieIndex]) {
       setTimeout(() => {
-        gridItems[this.selectedMovieIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        gridItems[this.selectedMovieIndex].scrollIntoView({ block: 'center' });
       });
     }
   }
