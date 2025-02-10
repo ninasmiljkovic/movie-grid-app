@@ -1,5 +1,5 @@
 <div class="movie-item"
-     [class.__selected]="movie.isSelected"
+     [class.movie-item__selected]="movie.isSelected"
 >
   <img [src]="'https://image.tmdb.org/t/p/w200/' + movie.poster_path"
        width="165px"
@@ -8,17 +8,23 @@
        loading="lazy"
   >
   <div class="movie-item__description">
-    <div class="movie-item__description__title-block">
+    <div class="movie-item__description__title-block"
+         [class.movie-selected]="movie.isSelected"
+    >
       {{ movie.title }}
     </div>
     <div class="movie-item__description__date-favourite-block">
-      {{ movie.release_date || '' }}
-      <div [innerText]="movie.inFavorites ? '★' : '☆'"
-           class="favorite-icon"
-           [class.__selected]="movie.isSelected"
-           (click)="toggleFavourites()"
+      <div class="movie-item__description__date"
+           [class.movie-selected]="movie.isSelected"
       >
+        {{ movie.release_date ? (movie.release_date | date:'dd.MM.yyyy.') : 'No Release Date' }}
       </div>
+      <span [innerText]="movie.inFavorites ? '★' : '☆'"
+            class="favorite-icon"
+            [class.favorite-icon__movie-selected]="movie.isSelected"
+            (click)="toggleFavourites()"
+      >
+      </span>
     </div>
   </div>
 </div>

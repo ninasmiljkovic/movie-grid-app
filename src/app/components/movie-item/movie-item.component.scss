@@ -4,12 +4,13 @@
   width: 165px;
   background: #FFFFFF;
   color: #111;
+  font-weight: 500;
   border-radius: 5px;
   overflow: hidden;
   text-align: center;
   transition: transform 0.1s ease-in-out, background 0.2s ease-in-out;
 
-  &.__selected {
+  &__selected {
     transform: scale(1.13, 1.15);
     cursor: pointer;
     background: #378ccb;
@@ -19,7 +20,7 @@
     z-index: 100;
   }
 
-  &:hover:not(.__selected) {
+  &:hover:not(.movie-item__selected) {
     cursor: pointer;
     opacity: 0.8;
     position: absolute;
@@ -38,6 +39,12 @@
     width: 145px;
     display: inline-block;
     text-align: justify;
+    transition: color 0.1s ease-in-out;
+
+    &.movie-selected {
+      color: #ffffff;
+      text-transform: uppercase;
+    }
   }
 
   &__description__date-favourite-block{
@@ -46,22 +53,34 @@
     align-items: center;
   }
 
+  &__description__date{
+    color: #666666;
+    opacity: 85%;
+    font-weight: 400;
+
+    &.movie-selected{
+      color: #e6e6e6e6;
+      opacity: 70%;
+    }
+  }
+
   img {
     border-radius: 5px 5px 0 0;
     overflow: visible;
   }
 
   .favorite-icon {
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 100;
     cursor: pointer;
-    transition: color 0.1s ease-in-out;
+    transition: font-weight 0.1s ease-in-out;
 
-    &:hover.__selected {
+    &__movie-selected{
       color: #e6e6e6;
     }
 
-    &:hover:not(.__selected) {
-      font-weight: bolder;
+    &:hover{
+      font-weight: 400;
     }
   }
 }
