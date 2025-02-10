@@ -89,6 +89,7 @@ export class MovieGridComponent implements AfterViewInit {
       if (this.selectedMovieIndex === -1) {
         this.visibleMovies[0].isSelected = true;
         this.selectedMovieIndex = 0;
+        this.scrollIntoView();
         return;
       }
 
