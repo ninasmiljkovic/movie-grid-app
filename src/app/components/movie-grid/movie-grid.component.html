@@ -1,11 +1,10 @@
 <div #gridContainer class="grid-container">
-  <div
-    class="grid-item"
-    *ngFor="let movie of visibleMovies; let i = index; trackBy: trackByMovieId"
-  >
-    <app-movie-item
-      [movie]="movie"
-      (click)="selectMovie(i)"
-    ></app-movie-item>
-  </div>
+  @for (movie of visibleMovies; let i = $index; track movie.id) {
+    <div class="grid-item">
+      <app-movie-item
+        [movie]="movie"
+        (click)="selectMovie(i)"
+      ></app-movie-item>
+    </div>
+  }
 </div>

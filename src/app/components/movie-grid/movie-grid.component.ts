@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, HostListener, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import { Movie } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
 
@@ -126,9 +126,5 @@ export class MovieGridComponent implements AfterViewInit {
     this.selectedMovieIndex = index;
 
     this.scrollIntoView();
-  }
-
-  trackByMovieId(index: number, movie: Movie): number {
-    return movie.id;
   }
 }
