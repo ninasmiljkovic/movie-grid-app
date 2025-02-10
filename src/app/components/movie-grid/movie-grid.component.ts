@@ -43,6 +43,9 @@ export class MovieGridComponent implements AfterViewInit {
     }
   }
 
+  arrowUpDownPressed = 0;
+  arrowCooldown = 200;
+
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     switch (event.key) {
@@ -50,6 +53,12 @@ export class MovieGridComponent implements AfterViewInit {
       case 'ArrowDown':
       case 'ArrowLeft':
       case 'ArrowRight':
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          const now = Date.now();
+          if(now - this.arrowUpDownPressed < this.arrowCooldown){ return }
+          this.arrowUpDownPressed = now;
+        }
         this.navigate(event.key);
         break;
       case 'Enter':
@@ -106,11 +115,7 @@ export class MovieGridComponent implements AfterViewInit {
     // Scroll adjustment to keep the selected item in center
     const gridItems = this.gridContainer.nativeElement.querySelectorAll('.grid-item');
 
-    if (gridItems[this.selectedMovieIndex]) {
-      setTimeout(() => {
-        gridItems[this.selectedMovieIndex].scrollIntoView({ block: 'center' });
-      });
-    }
+    gridItems[this.selectedMovieIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   selectMovie(index: number) {
